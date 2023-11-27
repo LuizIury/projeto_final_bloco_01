@@ -1,6 +1,11 @@
 package ecommerce;
 
+
+import ecommerce.model.Ecommerce;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import ecommerce.controller.EcommerceController;
 
 public class Menu {
 
@@ -8,8 +13,12 @@ public class Menu {
 		
 		Scanner leia = new Scanner(System.in);
 		int opcao;
-
 		
+		float preco;
+		String tipo, nome, numeroSerie;
+		
+		EcommerceController ecommerce = new EcommerceController();
+
 		while (true) {
 
 			System.out.println("*****************************************************");
@@ -18,21 +27,25 @@ public class Menu {
 			System.out.println("                                                     ");
 			System.out.println("*****************************************************");
 			System.out.println("                                                     ");
-			System.out.println("            1 - Criar conta                          ");
-			System.out.println("            2 - Listar produtos disponíveis          ");
-			System.out.println("            3 - Adicionar ao carrinho                ");
-			System.out.println("            4 - Efetuar pedido                       ");
-			System.out.println("            5 - Atualizar dados da conta             ");
-			System.out.println("            6 - Apagar Conta                         ");
-			System.out.println("            7 - Sair                                 ");
+			System.out.println("            1 - Criar produto                        ");
+			System.out.println("            2 - Listar produtos                      ");
+			System.out.println("            3 - Efetuar pedido                       ");
+			System.out.println("            4 - Apagar produto                       ");
+			System.out.println("            5 - Sair                                 ");
 			System.out.println("                                                     ");
 			System.out.println("*****************************************************");
 			System.out.println("O que deseja fazer agora?                            ");
 			System.out.println("                                                     ");
 
-			opcao = leia.nextInt();
+			try {
+				opcao = leia.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("\nDigite valores inteiros!");
+				leia.nextLine();
+				opcao = 0;
+			}
 
-			if (opcao == 7) {
+			if (opcao == 5) {
 				System.out.println("\nQue pena não ter pedido nada, LUIZ INFO SHOP espera ajudar na próxima!");
 				leia.close();
 				System.exit(0);
@@ -40,27 +53,26 @@ public class Menu {
 
 			switch (opcao) {
 				case 1:
-					System.out.println("Criar Conta\n\n");
-
+					System.out.println("Criar produto\n\n");
+					System.out.println("Digite o tipo do produto: ");
+					tipo = leia.next();
+					System.out.println("Digite o nome da marca: ");
+					nome = leia.next();
+					System.out.println("Digite o preço do produto: ");
+					preco = leia.nextFloat();
+					System.out.println("Digite o número de série do produto: ");
+					numeroSerie = leia.next();
 					break;
 				case 2:
-					System.out.println("Listar produtos disponíveis\n\n");
-
+					System.out.println("Listar produtos\n\n");
+					ecommerce.ListarProdutos();
 					break;
 				case 3:
-					System.out.println("Adicionar ao carrinho - em pilha\n\n");
-
-					break;
-				case 4:
 					System.out.println("Efetuar pedido\n\n");
 
 					break;
-				case 5:
-					System.out.println("Atualizar dados da conta\n\n");
-
-					break;
-				case 6:
-					System.out.println("Apagar Conta\n\n");
+				case 4:
+					System.out.println("Apagar produto\n\n");
 
 					break;
 					
